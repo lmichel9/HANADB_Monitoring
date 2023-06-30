@@ -93,6 +93,24 @@ test prometheus at <ip_adress>:9090
 test grafana at <ip_adress>:3000
 
 
+# NB:
+
+Modify config file (prometheus.yml or config.json) :
+
+docker service update --config-rm <old_config> --config-add source=<new_config>,target=<path_to_file_with_file> <service_name>
+
+example : docker service update --config-rm config_prometheus --config-add source=config_prometheus.v2,target=/home/prometheus/prometheus-2.45.0-rc.0.linux-amd64/prometheus.yml grafa-prom
+
+Start and stop services :
+
+docker service scale <service_name>=0 #stop service
+
+docker service scale <service_name>=1 #start service
+
+
+
+
+
 
 
 
