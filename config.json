@@ -1,0 +1,18 @@
+{
+  "listen_address": "0.0.0.0",
+  "exposition_port": 9668,
+  "multi_tenant": true,
+  "timeout": 30,
+  "hana": {
+    "host": "<ip_or_hostname>",
+    "port": 3<instance_number>13,
+    "user": "<hana_user>",
+    "password": "<password>",
+    "ssl": false,
+    "ssl_validate_cert": false
+  },
+  "logging": {
+    "config_file": "./logging_config.ini",
+    "log_file": "hanadb_exporter.log"
+  }
+}
