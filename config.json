@@ -5,7 +5,7 @@
   "timeout": 30,
   "hana": {
     "host": "<ip_or_hostname>",
-    "port": 3<instance_number>13,
+    "port": "3<instance_number>13",
     "user": "<hana_user>",
     "password": "<password>",
     "ssl": false,
