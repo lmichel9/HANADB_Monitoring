@@ -1,4 +1,4 @@
-# HANADB_Monitoring
+# hanadb_exporter
 Installation of hanadb_exporter, grafana and prometheus from a Dockerfile on openSUSE leap 15.4 (suitable on SLES15)
 
 This documentation is made to facilitate the installation in 4 steps of the exporter with docker and docker swarm
