@@ -59,13 +59,13 @@ GRANT HANADB_EXPORTER_ROLE TO HANADB_EXPORTER_USER;
 Be careful with your password the JSON config file is vulnerable to special characters !
 
 
-# 3.Create config, network and volume 
+# 3.Create secret, network and volume 
 
-create config for services you must have config file prometheus.yml and config.json :
+create secret for services you must have config file prometheus.yml and config.json :
 
-docker config create config_prometheus ./prometheus.yml
+docker secret create config_prometheus ./prometheus.yml
 
-docker config create config_hanadb ./config.json 
+docker secret create config_hanadb ./config.json 
 
 create network for services :
 
@@ -80,13 +80,13 @@ docker volume create grafana-storage
 
 install hanadb_exporter :
 
-docker service create --name hanadb -p 9668:9668 --network net_graf_prom --hostname hanadb.com --config source=config_hanadb,target=/usr/etc/hanadb_exporter/config.json louisap/hanadb_exporter
+docker service create --name hanadb -p 9668:9668 --network net_graf_prom --hostname hanadb.com --secret source=config_hanadb,target=/usr/etc/hanadb_exporter/config.json louisap/hanadb_exporter
 
 test it at <ip_adress>:9668 it should return metrics
 
 install grafana and promehteus :
 
-docker service create --name grafa_prom -p 9090:9090 -p 3000:3000 --network net_graf_prom --config source=config_prometheus,target=/home/prometheus/prometheus-2.45.0-rc.0.linux-amd64/prometheus.yml --mount src=grafana-storage,dst=/home/grafana/ louisap/opensuse_grafana_prometheus
+docker service create --name grafa_prom -p 9090:9090 -p 3000:3000 --network net_graf_prom --secret source=config_prometheus,target=/home/prometheus/prometheus-2.45.0-rc.0.linux-amd64/prometheus.yml --mount src=grafana-storage,dst=/home/grafana/ louisap/opensuse_grafana_prometheus
 
 test prometheus at <ip_adress>:9090
 
@@ -97,9 +97,9 @@ test grafana at <ip_adress>:3000
 
 Modify config file (prometheus.yml or config.json) :
 
-docker service update --config-rm <old_config> --config-add source=<new_config>,target=<path_to_file_with_file> <service_name>
+docker service update --secret-rm <old_config> --secret-add source=<new_config>,target=<path_to_file_with_file> <service_name>
 
-example : docker service update --config-rm config_prometheus --config-add source=config_prometheus.v2,target=/home/prometheus/prometheus-2.45.0-rc.0.linux-amd64/prometheus.yml grafa-prom
+example : docker service update --secret-rm config_prometheus --secret-add source=config_prometheus.v2,target=/home/prometheus/prometheus-2.45.0-rc.0.linux-amd64/prometheus.yml grafa-prom
 
 Start and stop services :
 
