@@ -62,19 +62,19 @@ Be careful with your password the JSON config file is vulnerable to special char
 # 3.Create secret, network and volume 
 
 create secret for services you must have config file prometheus.yml and config.json :
-
+```
 docker secret create config_prometheus ./prometheus.yml
 
 docker secret create config_hanadb ./config.json 
-
+```
 create network for services :
-
+```
 docker network create -d overlay --attachable net_graf_prom
-
+```
 create a volume for grafana :
-
+```
 docker volume create grafana-storage
-
+```
 
 # 4.install and test services
 
