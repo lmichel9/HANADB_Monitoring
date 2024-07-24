@@ -21,7 +21,7 @@ docker pull louisap/opensuse_grafana_prometheus (for grafana and prometheus)
 
 docker pull louisap/hanadb_exporter (for hanadb_exporter) 
 ```
-If you want to modify or view instructions you can visit https://github.com/lmichel9/Docker to get them in .txt
+If you want to modify or view instructions you can visit https://github.com/lmichel9/docker_image_hanadb_prom_graf to get them in .txt
 
 
 ### 2.Get config files 
